@@ -1,9 +1,12 @@
-import * as bodyParser from 'body-parser';
-import * as cookieParser from 'cookie-parser';
-import * as express from 'express';
-import { Response, Utils } from './common';
+import * as bodyParser from "body-parser";
+import * as cookieParser from "cookie-parser";
+import * as express from "express";
+import { Response, Utils } from "./common";
+import { DB } from "./database";
 
 const app = express();
+const initializeDB = new DB();
+initializeDB.init();
 
 app.use(bodyParser.json());
 app.use(
@@ -13,9 +16,9 @@ app.use(
 );
 app.use(cookieParser());
 
-app.use('/', (req, res, next) => {
+app.use("/", (req, res, next) => {
   res.send({
-    a: 'happy'
+    a: "happy"
   });
 });
 
