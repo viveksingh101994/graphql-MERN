@@ -1,8 +1,8 @@
 {
     "DB": {
-        "NAME": "",
-        "SERVER": "",
-        "USER": "",
-        "PASSWORD": ""
+        "NAME": "mern",
+        "SERVER": "abcd",
+        "USER": "vivek",
+        "PASSWORD": "12345"
     }
 }

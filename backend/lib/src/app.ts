@@ -1,8 +1,10 @@
 import * as bodyParser from "body-parser";
 import * as cookieParser from "cookie-parser";
 import * as express from "express";
+import * as graphqlHttp from "express-graphql";
 import { Response, Utils } from "./common";
 import { DB } from "./database";
+import { userSchema } from "./user/schema";
 
 const app = express();
 const initializeDB = new DB();
@@ -10,17 +12,19 @@ initializeDB.init();
 
 app.use(bodyParser.json());
 app.use(
-  express.urlencoded({
+  bodyParser.urlencoded({
     extended: false
   })
 );
 app.use(cookieParser());
 
-app.use("/", (req, res, next) => {
-  res.send({
-    a: "happy"
-  });
-});
+app.use(
+  "/graphql",
+  graphqlHttp({
+    schema: userSchema,
+    graphiql: true
+  })
+);
 
 // catch 404 and forward to error handler
 app.use((errObj, req, res, next) => {
